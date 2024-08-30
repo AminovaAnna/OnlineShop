@@ -8,9 +8,11 @@ import java.util.Objects;
 public class Ad {
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
- @Column(name = "adId")
+ @Column(name = "ad_Id")
  private long id;
+ @Column(name = "author_First_Name")
  private String authorFirstName;
+ @Column(name = "author_Last_Name")
  private String authorLastName;
  private String description;
  private String email;

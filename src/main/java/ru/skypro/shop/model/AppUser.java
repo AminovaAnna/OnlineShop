@@ -3,22 +3,29 @@ package ru.skypro.shop.model;
 import ru.skypro.shop.dto.RoleDto;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "users")
+public class AppUser {
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
- @Column(name = "userId")
+ @Column(name = "user_Id")
  private long userId;
- private String email;
+ @Column(name = "user_name")
  private String userName;
+ @Column(name = "email")
+ private String email;
+ @Column(name = "password")
  private String password;
+ @Column(name = "first_name")
  private String firstName;
+ @Column(name = "last_name")
  private String lastName;
+ @Column(name = "phone")
  private String phone;
+ @Column(name = "role")
  private RoleDto role;
+ @Column(name = "image")
  private String image;
 
 
@@ -30,20 +37,13 @@ public class User {
   this.userId = userId;
  }
 
+
  public String getEmail() {
   return email;
  }
 
  public void setEmail(String email) {
   this.email = email;
- }
-
- public String getUserName() {
-  return userName;
- }
-
- public void setUserName(String userName) {
-  this.userName = userName;
  }
 
  public String getPassword() {
@@ -78,6 +78,14 @@ public class User {
   this.phone = phone;
  }
 
+ public String getUserName() {
+  return userName;
+ }
+
+ public void setUserName(String userName) {
+  this.userName = userName;
+ }
+
  public RoleDto getRole() {
   return role;
  }
@@ -93,7 +101,6 @@ public class User {
  public void setImage(String image) {
   this.image = image;
  }
-
 
 
 }

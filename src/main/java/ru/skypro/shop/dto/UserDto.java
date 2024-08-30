@@ -2,19 +2,20 @@ package ru.skypro.shop.dto;
 
 import lombok.Data;
 
+import javax.persistence.Column;
+
 @Data
 public class UserDto {
-    private Long userId;
+    private long userId;
+//    private String userName;
     private String email;
-    private String userName;
-    // Обычно пароль в DTO не передается
-    // private String password;
+//    private String password;
     private String firstName;
     private String lastName;
     private String phone;
-    // Используйте Id роли вместо самого объекта RoleDto
-    private Long roleId;
+    private RoleDto role;
     private String image;
+
 }
 
 

@@ -1,6 +1,5 @@
 package ru.skypro.shop.controller;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.skypro.shop.dto.RegisterDto;
-import ru.skypro.shop.model.User;
+import ru.skypro.shop.model.AppUser;
+
 import ru.skypro.shop.service.AuthService;
 
 @Slf4j
@@ -25,14 +25,14 @@ public class AuthController {
     }
 
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
-        if (authService.login(user.getUserName(), user.getPassword())) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody Login login) {
+//        if (authService.login(login.getUserName(), login.getPassword())) {
+//            return ResponseEntity.ok().build();
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//        }
+//    }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDto register) {

@@ -2,30 +2,35 @@
 
 -- changeset annaa:1
 
-CREATE TABLE user(
-    userId BIGSERIAL PRIMARY KEY,
-    email TEXT,
-    userName TEXT,
-    password TEXT,
-    firstName TEXT,
-    lastName TEXT,
-    phone TEXT,
-    role ENUM('admin', 'user'),
-    image TEXT
+--CREATE TABLE roles (
+--    role_id BIGSERIAL PRIMARY KEY,
+--    roleName TEXT UNIQUE
+--);
+--INSERT INTO roles (roleName) VALUES ('USER'),('ADMIN');
 
-)
+CREATE TABLE users (
+    user_Id BIGSERIAL PRIMARY KEY,
+    user_name TEXT,
+    email TEXT,
+    password TEXT,
+    first_Name TEXT,
+    last_Name TEXT,
+    phone TEXT,
+    role INTEGER,
+    image TEXT
+);
 
 -- changeset annaa:2
 
 CREATE TABLE ad(
-    adId BIGSERIAL PRIMARY KEY,
-    authorFirstName TEXT,
-    authorLastName TEXT,
+    ad_Id BIGSERIAL PRIMARY KEY,
+    author_First_Name TEXT,
+    author_Last_Name TEXT,
     description TEXT,
     email TEXT,
     image TEXT,
     phone TEXT,
-    price LONG,
+    price BIGINT,
     title TEXT
 
-)
+);

@@ -10,15 +10,15 @@ public class RegisterDto {
     private String firstName;
     private String lastName;
     private String phone;
-    private RoleDto role;
+    private RoleDto roleId;
 
-    public RegisterDto(String username, String password, String firstName, String lastName, String phone, RoleDto role) {
+    public RegisterDto(String username, String password, String firstName, String lastName, String phone, RoleDto roleId) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        this.role = role;
+        this.roleId = roleId;
     }
 
     public String getUsername() {
@@ -62,11 +62,11 @@ public class RegisterDto {
     }
 
     public RoleDto getRole() {
-        return role;
+        return roleId;
     }
 
     public void setRole(RoleDto role) {
-        this.role = role;
+        this.roleId = roleId;
     }
 
 
