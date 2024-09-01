@@ -1,15 +1,19 @@
 package ru.skypro.shop.dto;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.skypro.shop.model.Role;
 
 import javax.persistence.Column;
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 
 @Data
 public class UserDto {
     private long userId;
-//    private String userName;
+    private String userName;
     private String email;
 //    private String password;
     private String firstName;
@@ -20,6 +24,10 @@ public class UserDto {
 
     public void setUser(UserDetails build) {
     }
+
+
+
+
 }
 
 

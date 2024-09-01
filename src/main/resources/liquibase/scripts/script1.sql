@@ -24,6 +24,7 @@ CREATE TABLE users (
 
 CREATE TABLE ad(
     ad_Id BIGSERIAL PRIMARY KEY,
+    user_Id BIGINT REFERENCES users(user_Id),
     author_First_Name TEXT,
     author_Last_Name TEXT,
     description TEXT,
@@ -32,5 +33,16 @@ CREATE TABLE ad(
     phone TEXT,
     price BIGINT,
     title TEXT
+
+);
+
+-- changeset annaa:3
+
+CREATE TABLE comments(
+    pk BIGINT PRIMARY KEY,
+    sent_time TIMESTAMP,
+    text TEXT NOT NULL,
+    ad_id integer NOT NULL,
+    user_id integer NOT NULL
 
 );

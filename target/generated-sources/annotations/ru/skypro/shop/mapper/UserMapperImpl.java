@@ -1,14 +1,16 @@
 package ru.skypro.shop.mapper;
 
 import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
 import ru.skypro.shop.dto.UserDto;
 import ru.skypro.shop.model.AppUser;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-31T21:26:49+0300",
+    date = "2024-09-01T21:38:58+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.3 (Amazon.com Inc.)"
 )
+@Component
 public class UserMapperImpl implements UserMapper {
 
     @Override
@@ -19,6 +21,7 @@ public class UserMapperImpl implements UserMapper {
 
         UserDto userDto = new UserDto();
 
+        userDto.setUserName( appUser.getUserName() );
         userDto.setEmail( appUser.getEmail() );
         userDto.setFirstName( appUser.getFirstName() );
         userDto.setLastName( appUser.getLastName() );
@@ -42,6 +45,7 @@ public class UserMapperImpl implements UserMapper {
         appUser.setFirstName( userDto.getFirstName() );
         appUser.setLastName( userDto.getLastName() );
         appUser.setPhone( userDto.getPhone() );
+        appUser.setUserName( userDto.getUserName() );
         appUser.setRole( userDto.getRole() );
         appUser.setImage( userDto.getImage() );
 
@@ -58,6 +62,7 @@ public class UserMapperImpl implements UserMapper {
 
         userDto.setRole( appUser.getRole() );
         userDto.setUserId( appUser.getUserId() );
+        userDto.setUserName( appUser.getUserName() );
         userDto.setEmail( appUser.getEmail() );
         userDto.setFirstName( appUser.getFirstName() );
         userDto.setLastName( appUser.getLastName() );
@@ -80,6 +85,7 @@ public class UserMapperImpl implements UserMapper {
         appUser.setFirstName( userDto.getFirstName() );
         appUser.setLastName( userDto.getLastName() );
         appUser.setPhone( userDto.getPhone() );
+        appUser.setUserName( userDto.getUserName() );
         appUser.setImage( userDto.getImage() );
 
         return appUser;

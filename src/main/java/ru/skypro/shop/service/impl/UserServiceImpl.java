@@ -11,7 +11,7 @@ import ru.skypro.shop.repository.UserRepository;
 import ru.skypro.shop.service.UserService;
 
 @Service
-public abstract class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -21,6 +21,11 @@ public abstract class UserServiceImpl implements UserService {
         this.userMapper = new UserMapperImpl();
     }
 
+
+    @Override
+    public UserDto getInfo(long id) {
+        return null;
+    }
 
     @Override
     public AppUser findUserByEmail(String email) {

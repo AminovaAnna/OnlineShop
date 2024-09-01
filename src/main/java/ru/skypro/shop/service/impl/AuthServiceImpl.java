@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import ru.skypro.shop.dto.RegisterDto;
+import ru.skypro.shop.dto.UserDto;
+import ru.skypro.shop.mapper.UserMapper;
 import ru.skypro.shop.model.AppUser;
 import ru.skypro.shop.model.Register;
 import ru.skypro.shop.repository.UserRepository;
@@ -14,21 +14,26 @@ import ru.skypro.shop.service.AuthService;
 import ru.skypro.shop.service.UserService;
 
 @Service
+
 public class AuthServiceImpl implements AuthService {
 
     private final UserDetailsManager manager;
     private final PasswordEncoder encoder;
     private final UserService userService;
+    public final UserMapper userMapper;
 
 
     private final UserRepository userRepository;
 
     public AuthServiceImpl(UserDetailsManager manager,
-                           PasswordEncoder passwordEncoder, UserService userService, UserRepository userRepository) {
+                           PasswordEncoder passwordEncoder, UserService userService, UserMapper userMapper, UserRepository userRepository) {
         this.manager = manager;
         this.encoder = passwordEncoder;
         this.userService = userService;
+        this.userMapper = userMapper;
+
         this.userRepository = userRepository;
+
 
     }
 
@@ -42,34 +47,58 @@ public class AuthServiceImpl implements AuthService {
     }
 
 
-    @Override
+//    @Override
+//
+//    public boolean register(Register register) {
+//        if (manager.userExists(register.getUserName())) {
+//            return false;
+//        }
+//        manager.createUser(
+//                User.builder()
+//                        .passwordEncoder(this.encoder::encode)
+//                        .password(register.getPassword())
+//                        .username(register.getUserName())
+//                        .roles(register.getRole().name())
+//                        .build());
+//
+//        AppUser appUser = userService.findUserByEmail(register.getEmail());
+//
+//        appUser.setFirstName(register.getFirstName());
+//        appUser.setLastName(register.getLastName());
+//        appUser.setPhone(register.getPhone());
+//
+//
+//        userRepository.save(appUser);
+//
+//        return true;
+//    }
+//}
 
+    @Override
     public boolean register(Register register) {
         if (manager.userExists(register.getUserName())) {
             return false;
+        } else {
+            UserDto userDto = new UserDto();
+            userDto.setUser(User.builder()
+                    .passwordEncoder(this.encoder::encode)
+                    .password(register.getPassword())
+                    .username(register.getUserName())
+                    .roles(register.getRole().name())
+                    .build());
+            userMapper.userDtoToAppUser(userDto);
+            AppUser appUser = new AppUser();
+            userDto.setUserId(register.getUserId());
+            userDto.setUserName(register.getUserName());
+
+            userDto.setRole(register.getRole());
+            userRepository.save(appUser);
+
+            return true;
+
+
         }
-        manager.createUser(
-                User.builder()
-                        .passwordEncoder(this.encoder::encode)
-                        .password(register.getPassword())
-                        .username(register.getUserName())
-                        .roles(register.getRole().name())
-                        .build());
-
-
-        AppUser createdUser = userService.findUserByEmail(register.getUserName());
-
-        createdUser.setFirstName(register.getFirstName());
-        createdUser.setLastName(register.getLastName());
-        createdUser.setPhone(register.getPhone());
-
-        userRepository.save(createdUser);
-
-        return true;
     }
-
-
-
 }
 
 
@@ -94,7 +123,7 @@ public class AuthServiceImpl implements AuthService {
 //        return true;
 //    }
 
-    //    @Override
+//    @Override
 //    public boolean register(Register register) {
 //        if (manager.userExists(register.getUserName())) {
 //            return false;

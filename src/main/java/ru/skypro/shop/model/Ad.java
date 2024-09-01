@@ -10,16 +10,14 @@ public class Ad {
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  @Column(name = "ad_Id")
  private long id;
- @Column(name = "author_First_Name")
- private String authorFirstName;
- @Column(name = "author_Last_Name")
- private String authorLastName;
+
  private String description;
- private String email;
  private String image;
- private String phone;
+
  private long price;
  private String title;
+ @ManyToOne(fetch = FetchType.LAZY)
+ private AppUser appUser;
 
 
  public long getId() {
@@ -30,22 +28,6 @@ public class Ad {
   this.id = id;
  }
 
- public String getAuthorFirstName() {
-  return authorFirstName;
- }
-
- public void setAuthorFirstName(String authorFirstName) {
-  this.authorFirstName = authorFirstName;
- }
-
- public String getAuthorLastName() {
-  return authorLastName;
- }
-
- public void setAuthorLastName(String authorLastName) {
-  this.authorLastName = authorLastName;
- }
-
  public String getDescription() {
   return description;
  }
@@ -54,28 +36,12 @@ public class Ad {
   this.description = description;
  }
 
- public String getEmail() {
-  return email;
- }
-
- public void setEmail(String email) {
-  this.email = email;
- }
-
  public String getImage() {
   return image;
  }
 
  public void setImage(String image) {
   this.image = image;
- }
-
- public String getPhone() {
-  return phone;
- }
-
- public void setPhone(String phone) {
-  this.phone = phone;
  }
 
  public long getPrice() {
@@ -94,17 +60,25 @@ public class Ad {
   this.title = title;
  }
 
+ public AppUser getAppUser() {
+  return appUser;
+ }
+
+ public void setAppUser(AppUser appUser) {
+  this.appUser = appUser;
+ }
+
  @Override
  public boolean equals(Object o) {
   if (this == o) return true;
   if (o == null || getClass() != o.getClass()) return false;
   Ad ad = (Ad) o;
-  return id == ad.id && price == ad.price && Objects.equals(authorFirstName, ad.authorFirstName) && Objects.equals(authorLastName, ad.authorLastName) && Objects.equals(description, ad.description) && Objects.equals(email, ad.email) && Objects.equals(image, ad.image) && Objects.equals(phone, ad.phone) && Objects.equals(title, ad.title);
+  return id == ad.id && price == ad.price && Objects.equals(description, ad.description) && Objects.equals(image, ad.image) && Objects.equals(title, ad.title) && Objects.equals(appUser, ad.appUser);
  }
 
  @Override
  public int hashCode() {
-  return Objects.hash(id, authorFirstName, authorLastName, description, email, image, phone, price, title);
+  return Objects.hash(id, description, image, price, title, appUser);
  }
 }
 

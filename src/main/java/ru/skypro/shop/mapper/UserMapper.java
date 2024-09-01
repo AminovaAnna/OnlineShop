@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 import ru.skypro.shop.dto.UserDto;
 import ru.skypro.shop.model.AppUser;
 
-@Mapper
-        //(componentModel = "spring")
+@Mapper(componentModel = "spring")
 @Component
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
