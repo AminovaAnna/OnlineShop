@@ -14,13 +14,15 @@ public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
     @Mapping(target = "userId", ignore = true)
 
-    UserDto adToAdDto(AppUser appUser);
+    UserDto appUserToUserDto(AppUser appUser);
 
-//    @Mapping(target = "roleId", source = "role.roleId")
-//    UserDto toDto(User user);
-//
-//    @Mapping(target = "role", ignore = true)
-//    User toEntity(UserDto userDto);
+    AppUser userDtoToAppUser(UserDto userDto);
+
+    @Mapping(target = "role", source = "role")
+    UserDto toDto(AppUser appUser);
+
+    @Mapping(target = "role", ignore = true)
+    AppUser toEntity(UserDto userDto);
 }
 
 

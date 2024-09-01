@@ -1,8 +1,10 @@
 package ru.skypro.shop.model;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import ru.skypro.shop.dto.RoleDto;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -23,8 +25,9 @@ public class AppUser {
  private String lastName;
  @Column(name = "phone")
  private String phone;
- @Column(name = "role")
- private RoleDto role;
+ @Column(nullable = false)
+ @Enumerated(EnumType.STRING)
+ private Role role;
  @Column(name = "image")
  private String image;
 
@@ -86,11 +89,11 @@ public class AppUser {
   this.userName = userName;
  }
 
- public RoleDto getRole() {
+ public Role getRole() {
   return role;
  }
 
- public void setRole(RoleDto role) {
+ public void setRole(Role role) {
   this.role = role;
  }
 
@@ -103,4 +106,19 @@ public class AppUser {
  }
 
 
+ public void setUser(UserDetails build) {
+ }
+
+ @Override
+ public boolean equals(Object o) {
+  if (this == o) return true;
+  if (o == null || getClass() != o.getClass()) return false;
+  AppUser user = (AppUser) o;
+  return Objects.equals(email, user.email);
+ }
+
+ @Override
+ public int hashCode() {
+  return Objects.hash(userId, userName, email, password, firstName, lastName, phone, role, image);
+ }
 }

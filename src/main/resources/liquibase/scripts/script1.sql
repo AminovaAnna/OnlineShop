@@ -16,7 +16,7 @@ CREATE TABLE users (
     first_Name TEXT,
     last_Name TEXT,
     phone TEXT,
-    role INTEGER,
+    role VARCHAR,
     image TEXT
 );
 
