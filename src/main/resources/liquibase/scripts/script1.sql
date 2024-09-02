@@ -24,7 +24,7 @@ CREATE TABLE users (
 
 CREATE TABLE ad(
     ad_Id BIGSERIAL PRIMARY KEY,
-    user_Id BIGINT REFERENCES users(user_Id),
+    app_user_user_Id BIGINT REFERENCES users(user_Id),
     author_First_Name TEXT,
     author_Last_Name TEXT,
     description TEXT,
@@ -45,4 +45,17 @@ CREATE TABLE comments(
     ad_id integer NOT NULL,
     user_id integer NOT NULL
 
+);
+
+-- changeset annaa:4
+
+CREATE TABLE images(
+    id serial NOT NULL,
+    file_size bigint,
+    media_type character varying(255),
+    path character varying(255),
+    ad_id integer,
+
+    CONSTRAINT images_pkey PRIMARY KEY (id),
+    CONSTRAINT ad_id_unique UNIQUE (ad_id)
 );

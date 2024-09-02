@@ -1,7 +1,6 @@
 package ru.skypro.shop.model;
 
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.skypro.shop.dto.RoleDto;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,12 +10,12 @@ import java.util.Objects;
 public class AppUser {
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
- @Column(name = "user_Id")
- private long userId;
+ @Column(name = "user_id")
+ private long id;
  @Column(name = "user_name")
  private String userName;
- @Column(name = "email")
- private String email;
+// @Column(name = "email")
+// private String email;
  @Column(name = "password")
  private String password;
  @Column(name = "first_name")
@@ -32,22 +31,22 @@ public class AppUser {
  private String image;
 
 
- public long getUserId() {
-  return userId;
+ public long getId() {
+  return id;
  }
 
- public void setUserId(long userId) {
-  this.userId = userId;
+ public void setId(long id) {
+  this.id = id;
  }
 
 
- public String getEmail() {
-  return email;
- }
-
- public void setEmail(String email) {
-  this.email = email;
- }
+// public String getEmail() {
+//  return email;
+// }
+//
+// public void setEmail(String email) {
+//  this.email = email;
+// }
 
  public String getPassword() {
   return password;
@@ -113,12 +112,15 @@ public class AppUser {
  public boolean equals(Object o) {
   if (this == o) return true;
   if (o == null || getClass() != o.getClass()) return false;
-  AppUser user = (AppUser) o;
-  return Objects.equals(email, user.email);
+  AppUser appUser = (AppUser) o;
+  return id == appUser.id && Objects.equals(userName, appUser.userName) && Objects.equals(password, appUser.password) && Objects.equals(firstName, appUser.firstName) && Objects.equals(lastName, appUser.lastName) && Objects.equals(phone, appUser.phone) && role == appUser.role && Objects.equals(image, appUser.image);
  }
 
  @Override
  public int hashCode() {
-  return Objects.hash(userId, userName, email, password, firstName, lastName, phone, role, image);
+  return Objects.hash(id, userName, password, firstName, lastName, phone, role, image);
  }
+
+// public String getEmail() {
+// }
 }

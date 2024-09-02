@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import ru.skypro.shop.dto.LoginDto;
 import ru.skypro.shop.dto.RegisterDto;
 import ru.skypro.shop.model.AppUser;
 
 import ru.skypro.shop.model.Login;
-import ru.skypro.shop.model.Register;
+
 import ru.skypro.shop.service.AuthService;
 
 @Slf4j
@@ -28,8 +29,8 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Login login) {
-        if (authService.login(login.getUserName(), login.getPassword())) {
+    public ResponseEntity<?> login(@RequestBody LoginDto login) {
+        if (authService.login(login.getUsername(), login.getPassword())) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -37,7 +38,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Register register) {
+    public ResponseEntity<?> register(@RequestBody RegisterDto register) {
         if (authService.register(register)) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else {

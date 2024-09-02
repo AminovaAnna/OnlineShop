@@ -2,6 +2,7 @@ package ru.skypro.shop.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.shop.dto.AdDto;
 import ru.skypro.shop.model.Ad;
@@ -24,8 +25,8 @@ public class AdController {
     }
 
     @PostMapping
-    public AdDto addAd(@RequestBody AdDto adDto) {
-        return adService.addAd(adDto);
+    public AdDto addAd(@RequestBody AdDto adDto, Authentication authentication) {
+        return adService.addAd(adDto, authentication);
     }
 
     @GetMapping("/{id}")

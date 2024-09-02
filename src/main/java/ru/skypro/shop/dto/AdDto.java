@@ -1,23 +1,20 @@
 package ru.skypro.shop.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Schema(name = "Ad")
 
 public class AdDto {
 
-    private long id;
-    private String authorFirstName;
-    private String authorLastName;
-    private String description;
-    private String email;
+    private Integer author;
     private String image;
-    private String phone;
-    private long price;
+    private Integer pk;
+    private Integer price;
     private String title;
+    private String description;
 }

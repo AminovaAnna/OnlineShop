@@ -5,10 +5,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
+import ru.skypro.shop.dto.RegisterDto;
 import ru.skypro.shop.dto.UserDto;
 import ru.skypro.shop.mapper.UserMapper;
 import ru.skypro.shop.model.AppUser;
-import ru.skypro.shop.model.Register;
+
 import ru.skypro.shop.repository.UserRepository;
 import ru.skypro.shop.service.AuthService;
 import ru.skypro.shop.service.UserService;
@@ -75,23 +76,23 @@ public class AuthServiceImpl implements AuthService {
 //}
 
     @Override
-    public boolean register(Register register) {
+    public boolean register(RegisterDto register) {
         if (manager.userExists(register.getUserName())) {
             return false;
         } else {
-            UserDto userDto = new UserDto();
-            userDto.setUser(User.builder()
-                    .passwordEncoder(this.encoder::encode)
-                    .password(register.getPassword())
-                    .username(register.getUserName())
-                    .roles(register.getRole().name())
-                    .build());
-            userMapper.userDtoToAppUser(userDto);
-            AppUser appUser = new AppUser();
-            userDto.setUserId(register.getUserId());
-            userDto.setUserName(register.getUserName());
 
-            userDto.setRole(register.getRole());
+            AppUser appUser = userMapper.registerToAppUser(register);
+//            AppUser appUser = new AppUser();
+//            appUser.setUserId(register.getUserId());
+//            appUser.setUserName(register.getUserName());
+//            appUser.setPassword(register.getPassword());
+//            appUser.setEmail(register.getEmail());
+//            appUser.setFirstName(register.getFirstName());
+//            appUser.setLastName(register.getLastName());
+//            appUser.setPhone(register.getPhone());
+//
+//            appUser.setRole(register.getRole());
+            appUser.setPassword(encoder.encode(register.getPassword()));
             userRepository.save(appUser);
 
             return true;

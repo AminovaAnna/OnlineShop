@@ -6,7 +6,7 @@ import ru.skypro.shop.model.AppUser;
 public interface UserService {
 
 
-    UserDto getInfo(long id);
+    UserDto getInfo(Long id);
 
     AppUser findUserByEmail(String email);
 }

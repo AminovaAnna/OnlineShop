@@ -1,24 +1,24 @@
 package ru.skypro.shop.repository;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import ru.skypro.shop.dto.AdDto;
+import org.springframework.stereotype.Repository;
 import ru.skypro.shop.model.Ad;
-import ru.skypro.shop.model.AppUser;
+import ru.skypro.shop.model.Comment;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface AdRepository extends JpaRepository<Ad,Long> {
-    Optional<Ad> findById(Integer id);
+@Repository
+public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
-    List<Ad> findAllByUser(AppUser user);
+    List<Comment> findAllByAd(Ad ad);
+
+    Optional<Comment> findByPk(Integer id);
 
     @Modifying
-    @Query(value = "DELETE FROM ads a WHERE a.pk = :pk", nativeQuery = true)
+    @Query(value = "DELETE FROM comments c WHERE c.pk = :pk", nativeQuery = true)
     void delete(@Param("pk") Integer pk);
 }

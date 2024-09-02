@@ -1,5 +1,6 @@
 package ru.skypro.shop.model;
 
+import lombok.*;
 import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
@@ -9,6 +10,11 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "comments")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 
 public class Comment {
     @Id
@@ -17,61 +23,14 @@ public class Comment {
     @Column(name = "sent_time")
     private Date sentTime;
     private String text;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
-    private AppUser appUser; // тут не уверена
-    @ManyToOne(fetch = FetchType.LAZY)
+    private AppUser user; // тут не уверена
+    @ManyToOne
     @JoinColumn(name = "ad_id")
     private Ad ad; // тут пока тоже
 
 
-    public Comment(Date sentTime, String text, AppUser appUser, Ad ad) {
-
-        this.sentTime = sentTime;
-        this.text = text;
-        this.appUser = appUser;
-        this.ad = ad;
-    }
-
-    public Long getPk() {
-        return pk;
-    }
-
-    public void setPk(Long pk) {
-        this.pk = pk;
-    }
-
-    public Date getSentTime() {
-        return sentTime;
-    }
-
-    public void setSentTime(Date sentTime) {
-        this.sentTime = sentTime;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public AppUser getAppUser() {
-        return appUser;
-    }
-
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
-    }
-
-    public Ad getAd() {
-        return ad;
-    }
-
-    public void setAd(Ad ad) {
-        this.ad = ad;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -92,7 +51,7 @@ public class Comment {
                 "pk=" + pk +
                 ", sentTime=" + sentTime +
                 ", text='" + text + '\'' +
-                ", appUser=" + appUser +
+                ", user=" + user +
                 ", ad=" + ad +
                 '}';
     }
